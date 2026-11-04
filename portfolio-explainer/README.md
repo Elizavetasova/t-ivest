@@ -84,7 +84,7 @@ npm run dev
         │   │   │
         │   │   ├── schemas/                               # Pydantic-модели
         │   │   │   ├── portfolio.py           # Модели данных Pydantic - Используем Pydantic v2.
-        │   │   │   ├── explanation.py           # Модель запроса на объяснение
+        │   │   │   ├── explanation.py         # Модель запроса на объяснение
         │   │   │   └── common.py
         │   │   │
         │   │   ├── services/                              # Логика приложения
