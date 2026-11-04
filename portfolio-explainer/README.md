@@ -1,3 +1,41 @@
+# Portfolio Explainer
+
+AI-agent for explaining changes in investment portfolios.
+
+## Architecture
+
+- React + TypeScript
+- Python + FastAPI
+- Pydantic
+- T-Invest API
+- LLM API
+
+## Features
+
+- Portfolio overview
+- Position analysis
+- Portfolio change explanation
+- Financial news integration
+- Source-backed AI explanations
+
+## Development
+
+### Backend
+
+cd backend
+
+pip install -r requirements.txt
+
+uvicorn app.main:app --reload
+
+### Frontend
+
+cd frontend
+
+npm install
+
+npm run dev
+
 ```
 
         portfolio-explainer/
@@ -97,3 +135,31 @@
 | LLM | OpenAI API | Генерация объяснений |
 | Валидация данных | Pydantic | Проверка структуры |
 | Хранение | JSON / SQLite | MVP не требует сложной базы |
+
+```
+        Pydantic schemas
+               |
+               v
+        Mock Portfolio Provider
+               |
+               v
+        GET /portfolio
+               |
+               v
+        React Portfolio UI
+               |
+               v
+        Portfolio Analysis
+               |
+               v
+        POST /explain
+               |
+               v
+        LLM integration
+               |
+               v
+        News integration
+```
+То есть сначала приложение должно работать без AI вообще.
+
+Потом добавляется AI.
