@@ -73,7 +73,7 @@ npm run dev
         │   └── vite.config.ts
         │
         ├── backend/
-        │   ├── app/
+        │   ├── app/                                       # реализация FastAPI
         │   │   ├── main.py
         │   │   │
         │   │   ├── api/
