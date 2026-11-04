@@ -6,19 +6,19 @@
         │   ├── public/
         │   │
         │   ├── src/
-        │   │   ├── api/
+        │   │   ├── api/   # HTTP-запросы к backend
         │   │   │   ├── client.ts
         │   │   │   ├── portfolio.ts
         │   │   │   └── explain.ts
         │   │   │
-        │   │   ├── components/
+        │   │   ├── components/   # UI-компоненты
         │   │   │   ├── PortfolioSummary.tsx
         │   │   │   ├── PositionTable.tsx
         │   │   │   ├── QuestionInput.tsx
         │   │   │   ├── ExplanationCard.tsx
         │   │   │   └── NewsSources.tsx
         │   │   │
-        │   │   ├── types/
+        │   │   ├── types/   # TypeScript-интерфейсы
         │   │   │   └── portfolio.ts
         │   │   │
         │   │   ├── hooks/
@@ -39,33 +39,33 @@
         │   │   ├── main.py
         │   │   │
         │   │   ├── api/
-        │   │   │   ├── routes/
-        │   │   │   │   ├── portfolio.py
+        │   │   │   ├── routes/   # REST endpoints   (API routes не должны содержать финансовые расчёты или логику работы с LLM.
+        │   │   │   │   ├── portfolio.py   #            Они только принимают запрос, вызывают service и возвращают результат.)
         │   │   │   │   └── explain.py
         │   │   │   └── dependencies.py
         │   │   │
-        │   │   ├── schemas/
-        │   │   │   ├── portfolio.py
-        │   │   │   ├── explanation.py
+        │   │   ├── schemas/   # Pydantic-модели
+        │   │   │   ├── portfolio.py   # Модели данных Pydantic - Используем Pydantic v2.
+        │   │   │   ├── explanation.py   # Модель запроса на объяснение
         │   │   │   └── common.py
         │   │   │
-        │   │   ├── services/
+        │   │   ├── services/   # Логика приложения
         │   │   │   ├── portfolio_service.py
         │   │   │   ├── analysis_service.py
         │   │   │   ├── news_service.py
         │   │   │   └── explanation_service.py
         │   │   │
-        │   │   ├── providers/
+        │   │   ├── providers/   # Источники финансовых данных
         │   │   │   ├── base.py
         │   │   │   ├── mock_provider.py
         │   │   │   └── tinvest_provider.py
         │   │   │
-        │   │   ├── repositories/
+        │   │   ├── repositories/   # 	Работа с данными
         │   │   │   └── portfolio_repository.py
         │   │   │
         │   │   └── config.py
         │   │
-        │   ├── tests/
+        │   ├── tests/   # Тесты
         │   │   ├── test_portfolio.py
         │   │   ├── test_analysis.py
         │   │   └── test_explanation.py
