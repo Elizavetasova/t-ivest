@@ -136,30 +136,4 @@ npm run dev
 | Валидация данных | Pydantic | Проверка структуры |
 | Хранение | JSON / SQLite | MVP не требует сложной базы |
 
-```
-        Pydantic schemas
-               |
-               v
-        Mock Portfolio Provider
-               |
-               v
-        GET /portfolio
-               |
-               v
-        React Portfolio UI
-               |
-               v
-        Portfolio Analysis
-               |
-               v
-        POST /explain
-               |
-               v
-        LLM integration
-               |
-               v
-        News integration
-```
-То есть сначала приложение должно работать без AI вообще.
 
-Потом добавляется AI.
