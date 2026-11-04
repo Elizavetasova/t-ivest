@@ -158,3 +158,30 @@ Backend — это серверная часть проекта. В нашем �
 | `GET` | Получить данные | Получить портфель |
 | `POST` | Отправить данные / выполнить действие | Запросить AI-анализ портфеля |
 
+```
+        Pydantic schemas
+               |
+               v
+        Mock Portfolio Provider
+               |
+               v
+        GET /portfolio
+               |
+               v
+        React Portfolio UI
+               |
+               v
+        Portfolio Analysis
+               |
+               v
+        POST /explain
+               |
+               v
+        LLM integration
+               |
+               v
+        News integration
+```
+То есть сначала приложение должно работать без AI вообще.
+
+Потом добавляется AI.
