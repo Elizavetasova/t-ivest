@@ -28,3 +28,24 @@ Data Layer — достаёт финансовые данные.
 Analysis Layer — рассчитывает фактические изменения.
 
 AI Layer — объясняет результат человеку.
+```
+Frontend
+   |
+   | POST + вопрос
+   v
+FastAPI endpoint
+   |
+   v
+explanation_service.py
+   |
+   +-- получает портфель
+   +-- рассчитывает факторы
+   +-- формирует объяснение
+   +-- создаёт request_id и generated_at
+   |
+   v
+ExplanationResponse (Pydantic)
+   |
+   v
+HTTP 200 + JSON
+```
