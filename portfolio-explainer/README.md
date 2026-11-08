@@ -44,10 +44,10 @@ npm run dev
         │   ├── public/
         │   │
         │   ├── src/
-        │   │   ├── api/                                   # HTTP-запросы к backend
-        │   │   │   ├── client.ts
-        │   │   │   ├── portfolio.ts
-        │   │   │   └── explain.ts
+        │   │   ├── api/                                   # HTTP-запросы к backend:
+        │   │   │   ├── client.ts                 # HTTP-клиент для обращения к backend
+        │   │   │   ├── portfolio.ts              # Функция получения портфеля
+        │   │   │   └── explain.ts                # Функция отправки запроса на объяснение
         │   │   │
         │   │   ├── components/                            # UI-компоненты
         │   │   │   ├── PortfolioSummary.tsx
@@ -56,8 +56,8 @@ npm run dev
         │   │   │   ├── ExplanationCard.tsx
         │   │   │   └── NewsSources.tsx
         │   │   │
-        │   │   ├── types/                                 # TypeScript-интерфейсы
-        │   │   │   └── portfolio.ts
+        │   │   ├── types/                                 # TypeScript-интерфейсы:
+        │   │   │   └── portfolio.ts              # TypeScript-типы для данных портфеля
         │   │   │
         │   │   ├── hooks/
         │   │   │   └── usePortfolio.ts
@@ -73,25 +73,25 @@ npm run dev
         │   └── vite.config.ts
         │
         ├── backend/
-        │   ├── app/                                       # реализация FastAPI
-        │   │   ├── main.py
+        │   ├── app/                                       
+        │   │   ├── main.py                                # FastAPI
         │   │   │
         │   │   ├── api/
-        │   │   │   ├── routes/                            # REST endpoints  
-        │   │   │   │   ├── portfolio.py       # (API routes не должны содержать финансовые расчёты или логику работы с LLM.    
-        │   │   │   │   └── explain.py           # Они только принимают запрос, вызывают service и возвращают результат.)
+        │   │   │   ├── routes/                            # REST endpoints:
+        │   │   │   │   ├── portfolio.py          # Endpoint портфеля    
+        │   │   │   │   └── explain.py            # Endpoint объяснения
         │   │   │   └── dependencies.py
         │   │   │
         │   │   ├── schemas/                               # Pydantic-модели
-        │   │   │   ├── portfolio.py           # Модели данных Pydantic - Используем Pydantic v2.
-        │   │   │   ├── explanation.py         # Модель запроса на объяснение
+        │   │   │   ├── portfolio.py              # Pydantic: описание структуры данных портфеля 
+        │   │   │   ├── explanation.py            # Pydantic: описание структуры запроса на объяснение и ответа с результатом анализа
         │   │   │   └── common.py
         │   │   │
-        │   │   ├── services/                              # Логика приложения
-        │   │   │   ├── portfolio_service.py
+        │   │   ├── services/                              # Логика приложения:
+        │   │   │   ├── portfolio_service.py      # Mock-портфель и расчёты
         │   │   │   ├── analysis_service.py
         │   │   │   ├── news_service.py
-        │   │   │   └── explanation_service.py
+        │   │   │   └── explanation_service.py    # Объяснение пока что без LLM
         │   │   │
         │   │   ├── providers/                             # Источники финансовых данных
         │   │   │   ├── base.py
@@ -116,12 +116,20 @@ npm run dev
         │
         ├── docs/
         │   ├── architecture.md
-        │   └── api-contract.md
+        │   └── api-contract.md                            # REST-контракт
         │
         ├── .gitignore
-        ├── README.md
+        ├── README.md                                      # Документация проекта
         └── docker-compose.yml
 
+
+# (API routes не должны содержать финансовые расчёты или логику работы с LLM.    
+# Они только принимают запрос, вызывают service и возвращают результат.)
+
+# Модели данных Pydantic - Используем Pydantic v2.
+
+# В текущей реализации mock-данные находятся непосредственно в сервисе
+# — отдельный mock_portfolio.json в рассмотренной версии не используется.
 ```
 
 | Компонент | Технология | Почему |
