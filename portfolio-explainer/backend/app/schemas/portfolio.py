@@ -1,5 +1,6 @@
 from datetime import datetime
-from pydantic import BaseModel, Field
+
+from pydantic import BaseModel
 
 
 class Position(BaseModel):
@@ -12,6 +13,7 @@ class Position(BaseModel):
     previous_price: float
 
     market_value: float
+    change_absolute: float
     weight_percent: float
 
     change_percent: float
@@ -35,4 +37,3 @@ class PortfolioSummary(BaseModel):
 class PortfolioResponse(BaseModel):
     summary: PortfolioSummary
     positions: list[Position]
-
