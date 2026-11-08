@@ -1,3 +1,5 @@
+# Обработку неизвестного портфеля (ValueError → 404) лучше сделать отдельно.
+
 from fastapi import APIRouter
 
 from app.schemas.explanation import (
