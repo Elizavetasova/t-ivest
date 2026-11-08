@@ -16,7 +16,7 @@
 # денежные потоки.
 
 from typing import Any
-
+from datetime import datetime, timezone
 
 MOCK_PORTFOLIOS: dict[str, dict[str, Any]] = {
     "demo-001": {
@@ -113,12 +113,15 @@ def get_portfolio(portfolio_id: str) -> dict[str, Any]:
         )
 
     return {
-        "portfolio_id": portfolio_id,
-        "currency": portfolio["currency"],
-        "total_value": round(total_value, 2),
-        "previous_value": round(previous_value, 2),
-        "change_absolute": round(portfolio_change_absolute, 2),
-        "change_percent": round(portfolio_change_percent, 2),
-        "positions_count": len(positions),
+        "summary": {
+            "portfolio_id": portfolio_id,
+            "currency": portfolio["currency"],
+            "total_value": round(total_value, 2),
+            "previous_value": round(previous_value, 2),
+            "change_absolute": round(portfolio_change_absolute, 2),
+            "change_percent": round(portfolio_change_percent, 2),
+            "positions_count": len(positions),
+            "updated_at": datetime.now(timezone.utc),
+        },
         "positions": positions,
     }
