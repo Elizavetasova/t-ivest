@@ -16,7 +16,9 @@
 # 5. Проверку и возврат ответа.
 # Сам endpoint при этом менять практически не придётся.
 
+from datetime import datetime, timezone
 from typing import Any
+from uuid import uuid4
 
 from app.services.portfolio_service import get_portfolio
 
@@ -26,13 +28,17 @@ def explain_portfolio(
     question: str,
     period: str = "day",
 ) -> dict[str, Any]:
-    """Формирует объяснение изменения портфеля."""
+    """Формирует объяснение изменения портфеля без LLM."""
 
     portfolio = get_portfolio(portfolio_id)
 
-    change_percent = portfolio["change_percent"]
-    change_absolute = portfolio["change_absolute"]
-    currency = portfolio["currency"]
+    # После исправления portfolio_service
+    # показатели портфеля находятся в summary.
+    portfolio_summary = portfolio["summary"]
+
+    change_percent = portfolio_summary["change_percent"]
+    change_absolute = portfolio_summary["change_absolute"]
+    currency = portfolio_summary["currency"]
 
     if change_percent < 0:
         summary = (
@@ -47,6 +53,8 @@ def explain_portfolio(
     else:
         summary = "Стоимость портфеля не изменилась."
 
+    # Сортируем позиции от наибольшего отрицательного
+    # изменения к наименьшему.
     sorted_positions = sorted(
         portfolio["positions"],
         key=lambda position: position["change_absolute"],
@@ -55,27 +63,55 @@ def explain_portfolio(
     main_factors = []
 
     for position in sorted_positions[:3]:
+        change = position["change_absolute"]
+
+        if change < 0:
+            factor_explanation = (
+                f"Стоимость позиции снизилась на "
+                f"{abs(change):,.2f} {currency}."
+            )
+        elif change > 0:
+            factor_explanation = (
+                f"Стоимость позиции выросла на "
+                f"{change:,.2f} {currency}."
+            )
+        else:
+            factor_explanation = (
+                "Стоимость позиции не изменилась."
+            )
+
         main_factors.append({
             "ticker": position["ticker"],
             "name": position["name"],
-            "change_percent": round(position["change_percent"], 2),
+            "change_percent": round(
+                position["change_percent"], 2
+            ),
             "contribution_percent": round(
                 position["contribution_percent"], 2
             ),
-            "change_absolute": round(position["change_absolute"], 2),
+            "explanation": factor_explanation,
         })
 
     return {
+        "request_id": str(uuid4()),
         "portfolio_id": portfolio_id,
+        "generated_at": datetime.now(timezone.utc),
+
         "question": question,
         "period": period,
+
+        "portfolio_change_percent": round(
+            change_percent, 2
+        ),
         "summary": summary,
-        "portfolio_change_percent": change_percent,
+
         "main_factors": main_factors,
         "possible_causes": [],
         "sources": [],
+
         "limitations": [
             "Используются демонстрационные данные.",
             "Новости и рыночные события пока не анализируются.",
+            "Объяснение сформировано без использования LLM.",
         ],
     }
