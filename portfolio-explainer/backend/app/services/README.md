@@ -32,3 +32,24 @@ GET /api/v1/portfolio/demo-001
 Когда это заработает, аналогичным образом будет проще реализовать POST для AI-объяснения.
 
 Так вы получите первый работающий вертикальный срез продукта, а не просто набор пустых файлов.
+```
+Frontend
+   |
+   | POST + вопрос
+   v
+FastAPI endpoint
+   |
+   v
+explanation_service.py
+   |
+   +-- получает портфель
+   +-- рассчитывает факторы
+   +-- формирует объяснение
+   +-- создаёт request_id и generated_at
+   |
+   v
+ExplanationResponse (Pydantic)
+   |
+   v
+HTTP 200 + JSON
+```
