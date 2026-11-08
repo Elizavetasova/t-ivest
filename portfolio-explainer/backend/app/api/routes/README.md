@@ -28,3 +28,29 @@ Data Layer — достаёт финансовые данные.
 Analysis Layer — рассчитывает фактические изменения.
 
 AI Layer — объясняет результат человеку.
+```
+React
+  |
+  | GET portfolio
+  v
+FastAPI
+  |
+  v
+Mock portfolio
+  |
+  v
+Расчёты
+  |
+  v
+React отображает портфель
+  |
+  | POST explain
+  v
+FastAPI
+  |
+  v
+Explanation service
+  |
+  v
+React отображает объяснение
+```
